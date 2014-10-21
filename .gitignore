@@ -1,0 +1,16 @@
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+coverage.html
+coverage/
+cov/
+
+node_modules
+
+dump.rdb
+.DS_Store
