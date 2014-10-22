@@ -10,11 +10,6 @@ var port = process.env.PORT || 3000;
 // Routing
 app.use(staticCache(path.join(__dirname, 'public')));
 
-app.use(function*() {
-  this.body = fs.createReadStream(path.join(__dirname, 'public/index.html'));
-  this.type = 'html';
-});
-
 app.listen(port, function () {
   console.log('Server listening at port %d', port);
 });
