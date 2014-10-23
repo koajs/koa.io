@@ -21,12 +21,20 @@ koa.io
 [gittip-image]: https://img.shields.io/gittip/dead-horse.svg?style=flat-square
 [gittip-url]: https://www.gittip.com/dead-horse/
 
-realtime web framework combine koa and socket.io
+Realtime web framework combine [koa](http://koajs.com) and [socket.io](http://socket.io).
+
+___This project is under development now.___ 
+
+## Feature
+
+- Make `socket.io` support koa style middleware.
+- Make `socket.io`'s event handler support generator function.
+- Extent `socket.io`'s `socket` object like `koa`'s `context`, to compact with some `koa`'s middlewares.
 
 ## Installation
 
 ```bash
-$ npm install koa.io
+$ npm install koa.io --save
 ```
 
 ## Usage
