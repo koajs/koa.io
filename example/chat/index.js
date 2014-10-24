@@ -27,7 +27,9 @@ var numUsers = 0;
 
 // middleware for connect and disconnect
 app.io.use(function* userLeft(next) {
+  // on connect
   yield* next;
+  // on disconnect
   if (this.addedUser) {
     delete usernames[this.username];
     --numUsers;

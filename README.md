@@ -27,7 +27,8 @@ ___This project is under development now.___
 
 ## Feature
 
-- Make `socket.io` support koa style middleware.
+- `socket.io` support koa style middleware when socket connect and disconnect.
+- socket event route support.
 - Make `socket.io`'s event handler support generator function.
 - Extent `socket.io`'s `socket` object like `koa`'s `context`, to compact with some `koa`'s middlewares.
 
@@ -38,6 +39,35 @@ $ npm install koa.io --save
 ```
 
 ## Usage
+
+```js
+var koa = require('koa.io');
+
+var app = koa();
+
+app.use(function*() {
+  // koa middlewares
+});
+
+
+// middleware for scoket.io's connect and disconnect
+app.io.use(function* (next) {
+  // on connect
+  yield* next;
+  // on disconnect
+});
+
+// router for socket event
+app.io.route('new message', function* () {
+  // we tell the client to execute 'new message'
+  var message = this.args[0];
+  this.socket.broadcast.emit('new message', message);
+});
+
+app.listen(3000);
+```
+
+Please check out this simple [chat example](example/chat).
 
 ### License
 
