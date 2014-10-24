@@ -1,16 +1,14 @@
 
-# Socket.IO Chat
+# Koa.IO Chat
 
-A simple chat demo for socket.io
+A simple chat demo for koa.io
 
 ## How to use
 
 ```
-$ cd socket.io
+$ cd koa.io
 $ npm install
-$ cd examples/chat
-$ npm install
-$ node .
+$ node --harmony example/chat
 ```
 
 And point your browser to `http://localhost:3000`. Optionally, specify
