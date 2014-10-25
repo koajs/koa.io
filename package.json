@@ -28,6 +28,7 @@
     "co-event-wrap": "~0.1.0",
     "cookies": "~0.5.0",
     "debug": "~2.1.0",
+    "delegates": "~0.1.0",
     "koa": "~0.13.0",
     "koa-compose": "~2.3.0",
     "koa-generic-session": "~1.2.2",
