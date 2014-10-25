@@ -45,8 +45,8 @@ var koa = require('koa.io');
 
 var app = koa();
 
+// middleware for koa
 app.use(function*() {
-  // koa middlewares
 });
 
 
@@ -61,7 +61,7 @@ app.io.use(function* (next) {
 app.io.route('new message', function* () {
   // we tell the client to execute 'new message'
   var message = this.args[0];
-  this.socket.broadcast.emit('new message', message);
+  this.broadcast.emit('new message', message);
 });
 
 app.listen(3000);
