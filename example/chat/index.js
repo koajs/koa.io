@@ -46,9 +46,9 @@ app.io.use(function* userLeft(next) {
  * router for socket event
  */
 
-app.io.route('add user', function* () {
+app.io.route('add user', function* (next, username) {
   // we store the username in the socket session for this client
-  var username = this.username = this.args[0];
+  this.username = username;
   // add the client's username to the global list
   usernames[username] = username;
   ++numUsers;
@@ -65,11 +65,11 @@ app.io.route('add user', function* () {
 });
 
 // when the client emits 'new message', this listens and executes
-app.io.route('new message', function* () {
+app.io.route('new message', function* (next, message) {
   // we tell the client to execute 'new message'
   this.broadcast.emit('new message', {
     username: this.username,
-    message: this.args[0]
+    message: message
   });
 });
 
