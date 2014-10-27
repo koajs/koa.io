@@ -17,13 +17,17 @@ var should = require('should');
 var koa = require('..');
 
 describe('application', function () {
-  describe('koa', function () {
-    it('should GET / ok', function (done) {
+  describe('app', function () {
+    it('should be instance of koa', function () {
       var app = App();
-      request(app.listen())
-      .get('/')
-      .expect(200)
-      .expect('hello', done);
+      (app instanceof require('koa')).should.be.ok;
+    });
+  });
+
+  describe('app.io', function () {
+    it('should be instanceof of socket.io', function () {
+      var app = App();
+      (app.io instanceof require('socket.io')).should.be.ok;
     });
   });
 
@@ -48,18 +52,40 @@ describe('application', function () {
           .get('/')
           .expect(200)
           .expect('hello', function (err, res) {
-            should.not.exist(err);
-            var cookie = encodeURIComponent(res.headers['set-cookie'].join(';'));
-            var socket = client(server, {query: 'cookie=' + cookie});
-            done = pedding(done, 2);
-            socket.on('connect', done);
-            socket.on('user join', function (name) {
+          should.not.exist(err);
+          var cookie = encodeURIComponent(res.headers['set-cookie'].join(';'));
+          var socket = client(server, {query: 'cookie=' + cookie});
+          done = pedding(done, 3);
+          socket.on('connect', done);
+          socket.on('user join', function (name) {
+            name.should.equal('foo');
+            done();
+            socket.disconnect();
+            socket.on('user leave', function (name) {
               name.should.equal('foo');
               done();
             });
-          })
+          });
+        });
       });
-    })
+    });
+  });
+
+  describe('app.keys=', function () {
+    it('should set app.io.keys', function () {
+      var app = koa();
+      app.keys = ['foo'];
+      app.io.keys.should.eql(['foo']);
+      app._keys.should.eql(['foo']);
+    });
+  });
+
+  describe('keys', function () {
+    it('should get app._keys', function () {
+      var app = koa();
+      app.keys = ['foo'];
+      app.keys.should.equal(app._keys);
+    });
   });
 });
 
@@ -73,7 +99,9 @@ function App() {
     yield *next;
   });
 
-  app.session();
+  app.session({
+    namespace: '/'
+  });
 
   app.use(function* () {
     this.session.user = { name: 'foo' };

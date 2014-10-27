@@ -1,5 +1,5 @@
 TESTS = test/*.test.js
-REPORTER = tap
+REPORTER = spec
 TIMEOUT = 3000
 MOCHA_OPTS =
 
