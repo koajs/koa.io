@@ -7,7 +7,7 @@ install:
 	@npm install --registry=http://registry.npm.taobao.org
 
 test:
-	@NODE_ENV=test ./node_modules/mocha/bin/mocha \
+	@NODE_ENV=test ./node_modules/mocha/bin/mocha --harmony \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		--require should \
@@ -15,7 +15,7 @@ test:
 		$(TESTS)
 
 test-cov:
-	@NODE_ENV=test node \
+	@NODE_ENV=test node --harmony \
 		node_modules/.bin/istanbul cover \
 		./node_modules/.bin/_mocha \
 		-- -u exports \
@@ -24,7 +24,7 @@ test-cov:
 		--bail
 
 test-travis:
-	@NODE_ENV=test node \
+	@NODE_ENV=test node --harmony \
 		node_modules/.bin/istanbul cover \
 		./node_modules/.bin/_mocha \
 		--report lcovonly \
@@ -34,7 +34,8 @@ test-travis:
 		--bail
 
 autod: install
-	@node_modules/.bin/autod -w -e example.js --prefix=~
+	@node_modules/.bin/autod -w --prefix=~ \
+    -D mocha,should,istanbul-harmony
 	@$(MAKE) install
 
 .PHONY: test
