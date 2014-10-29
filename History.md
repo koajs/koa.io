@@ -1,4 +1,12 @@
 
+0.0.2 / 2014-10-29 
+==================
+
+  * make sure upstream is call after disconnect
+  * ubgrade socket.io to 1.2.0
+  * delegate socket.join and socket.leave
+  * Added Gitter badge
+
 0.0.1 / 2014-10-25 
 ==================
 
