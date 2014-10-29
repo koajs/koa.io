@@ -55,16 +55,11 @@ describe('application', function () {
           should.not.exist(err);
           var cookie = encodeURIComponent(res.headers['set-cookie'].join(';'));
           var socket = client(server, {query: 'cookie=' + cookie});
-          done = pedding(done, 3);
+          done = pedding(done, 2);
           socket.on('connect', done);
           socket.on('user join', function (name) {
             name.should.equal('foo');
             done();
-            socket.disconnect();
-            socket.on('user leave', function (name) {
-              name.should.equal('foo');
-              done();
-            });
           });
         });
       });
@@ -113,7 +108,7 @@ function App() {
       return this.socket.emit('forbidden');
     }
     this.emit('user join', this.session.user.name);
-    yield next;
+    yield *next;
     this.emit('user leave', this.session.user.name);
   });
 

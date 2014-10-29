@@ -28,6 +28,7 @@ var numUsers = 0;
 // middleware for connect and disconnect
 app.io.use(function* userLeft(next) {
   // on connect
+  console.log('somebody connected');
   yield* next;
   // on disconnect
   if (this.addedUser) {
@@ -41,6 +42,7 @@ app.io.use(function* userLeft(next) {
     });
   }
 });
+
 
 /**
  * router for socket event
