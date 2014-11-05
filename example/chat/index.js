@@ -29,6 +29,7 @@ var numUsers = 0;
 app.io.use(function* userLeft(next) {
   // on connect
   console.log('somebody connected');
+  console.log(this.headers)
   yield* next;
   // on disconnect
   if (this.addedUser) {

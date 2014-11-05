@@ -10,13 +10,13 @@
  * Module dependencies.
  */
 
-var ioc = require('socket.io-client');
+var client = require('./supports/client');
+var App = require('./supports/app');
 var request = require('supertest');
 var pedding = require('pedding');
 var should = require('should');
-var koa = require('..');
 
-describe('application', function () {
+describe('lib/application.js', function () {
   describe('app', function () {
     it('should be instance of koa', function () {
       var app = App();
@@ -68,7 +68,7 @@ describe('application', function () {
 
   describe('app.keys=', function () {
     it('should set app.io.keys', function () {
-      var app = koa();
+      var app = App();
       app.keys = ['foo'];
       app.io.keys.should.eql(['foo']);
       app._keys.should.eql(['foo']);
@@ -77,61 +77,10 @@ describe('application', function () {
 
   describe('keys', function () {
     it('should get app._keys', function () {
-      var app = koa();
+      var app = App();
       app.keys = ['foo'];
       app.keys.should.equal(app._keys);
     });
   });
 });
 
-function App() {
-  var app = koa();
-  app.keys = ['secrect'];
-
-  app.io.use(function* (next) {
-    // we can't send cookie in ioc
-    this.header.cookie = this.query.cookie;
-    yield *next;
-  });
-
-  app.session({
-    namespace: '/'
-  });
-
-  app.use(function* () {
-    this.session.user = { name: 'foo' };
-    this.body = 'hello';
-  });
-
-  app.io.use(function* (next) {
-    if (!this.session.user) {
-      return this.socket.emit('forbidden');
-    }
-    this.emit('user join', this.session.user.name);
-    yield *next;
-    this.emit('user leave', this.session.user.name);
-  });
-
-  app.io.route('message', function (next, message) {
-    this.broadcase.emit('message', message);
-  });
-
-  return app;
-}
-
-// creates a socket.io client for the given server
-function client(srv, nsp, opts){
-  if ('object' == typeof nsp) {
-    opts = nsp;
-    nsp = null;
-  }
-  opts = opts || {};
-
-  var addr = srv.address();
-  if (!addr) addr = srv.listen().address();
-  var url = 'ws://0.0.0.0:' + addr.port + (nsp || '');
-  if (opts.query) {
-    url += '?' + opts.query;
-  }
-  return ioc(url, opts);
-}
