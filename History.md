@@ -1,4 +1,10 @@
 
+0.0.3 / 2015-02-22 
+==================
+
+  * upgrade co dep, use co.wrap to return promise generator
+  * fix this.headers
+
 0.0.2 / 2014-10-29 
 ==================
 
