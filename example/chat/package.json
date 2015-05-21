@@ -8,6 +8,6 @@
   "license": "BSD",
   "dependencies": {
     "koa.io": "0.0.3",
-    "koa-generic-session": "3"
+    "koa-generic-session": "1"
   }
 }
