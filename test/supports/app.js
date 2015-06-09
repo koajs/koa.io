@@ -40,8 +40,6 @@ module.exports = function SessionApp() {
     this.emit('user leave', this.session.user.name);
   });
 
-  app.io.route('message', function (next, message) {
-    this.broadcase.emit('message', message);
   app.io.route('message', function* (next, message) {
     this.emit('message', message);
     yield *next;
