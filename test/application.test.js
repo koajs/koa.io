@@ -63,6 +63,27 @@ describe('lib/application.js', function () {
           });
         });
       });
+
+      it('should echo message', function (done) {
+        var app = App();
+        var server = app.listen();
+
+        request(server)
+          .get('/')
+          .expect(200)
+          .expect('hello', function (err, res) {
+          should.not.exist(err);
+          var cookie = encodeURIComponent(res.headers['set-cookie'].join(';'));
+          var socket = client(server, {query: 'cookie=' + cookie});
+          done = pedding(done, 2);
+          socket.on('connect', done);
+          socket.on('message', function (message) {
+            message.should.equal('message');
+            done();
+          });
+          socket.emit('message', 'message');
+        });
+      });
     });
   });
 
