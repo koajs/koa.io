@@ -18,6 +18,11 @@
     "email": "dead_horse@qq.com",
     "url": "http://deadhorse.me"
   },
+  "contributors": [{
+    "name": "Ari Porad",
+    "email": "npm@ariporad.com",
+    "url": "http://ariporad.com"
+  }],
   "repository": {
     "type": "git",
     "url": "git@github.com:koajs/koa.io"
