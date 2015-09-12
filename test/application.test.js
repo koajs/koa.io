@@ -4,8 +4,6 @@
  * MIT Licensed
  */
 
-'use strict';
-
 /**
  * Module dependencies.
  */
@@ -16,79 +14,79 @@ var request = require('supertest');
 var pedding = require('pedding');
 var should = require('should');
 
-describe('lib/application.js', function () {
-  describe('app', function () {
-    it('should be instance of koa', function () {
+describe('lib/application.js', function libApplication() {
+  describe('app', function dApp() {
+    it('should be instance of koa', function itInstanceOfKoa() {
       var app = App();
       (app instanceof require('koa')).should.be.ok;
     });
   });
 
-  describe('app.io', function () {
-    it('should be instanceof of socket.io', function () {
+  describe('app.io', function dAppIO() {
+    it('should be instanceof of socket.io', function itInstanceOfSocketIO() {
       var app = App();
       (app.io instanceof require('socket.io')).should.be.ok;
     });
   });
 
-  describe('session', function () {
-    describe('when no session', function () {
-      it('should emit forbidden', function (done) {
+  describe('session', function dSession() {
+    describe('when no session', function dWhenNoSession() {
+      it('should emit forbidden', function itEmitForbidden(_done) {
         var app = App();
         var server = app.listen();
         var socket = client(server);
-        done = pedding(done, 2);
+        var done = pedding(_done, 2);
         socket.on('connect', done);
         socket.on('forbidden', done);
       });
     });
 
-    describe('when with session', function () {
-      it('should emit user join', function (done) {
+    describe('when with session', function dWhenWithSession() {
+      it('should emit user join', function itEmitUserJoin(_done) {
         var app = App();
         var server = app.listen();
 
         request(server)
           .get('/')
           .expect(200)
-          .expect('hello', function (err, res) {
-          should.not.exist(err);
-          var cookie = encodeURIComponent(res.headers['set-cookie'].join(';'));
-          var socket = client(server, {query: 'cookie=' + cookie});
-          done = pedding(done, 2);
-          socket.on('connect', done);
-          socket.on('user join', function (name) {
-            name.should.equal('foo');
-            done();
+          .expect('hello', function requestDone(err, res) {
+            should.not.exist(err);
+            var cookie = encodeURIComponent(res.headers['set-cookie'].join(';'));
+            var socket = client(server, {query: 'cookie=' + cookie});
+            var done = pedding(_done, 2);
+            socket.on('connect', done);
+            socket.on('user join', function userJoin(name) {
+              name.should.equal('foo');
+              done();
+            });
           });
-        });
       });
 
-      it('should echo message', function (done) {
+      it('should echo message', function itEchoMessage(_done) {
         var app = App();
         var server = app.listen();
 
         request(server)
           .get('/')
           .expect(200)
-          .expect('hello', function (err, res) {
-          should.not.exist(err);
-          var cookie = encodeURIComponent(res.headers['set-cookie'].join(';'));
-          var socket = client(server, {query: 'cookie=' + cookie});
-          done = pedding(done, 2);
-          socket.on('connect', done);
-          socket.on('message', function (message) {
-            message.should.equal('message');
-            done();
+          .expect('hello', function requestDone(err, res) {
+            should.not.exist(err);
+            var cookie = encodeURIComponent(res.headers['set-cookie'].join(';'));
+            var socket = client(server, {query: 'cookie=' + cookie});
+            var done = pedding(_done, 2);
+            socket.on('connect', done);
+            socket.on('message', function messageHandler(message) {
+              message.should.equal('message');
+              done();
+            });
+            socket.emit('message', 'message');
           });
-          socket.emit('message', 'message');
-        });
       });
     });
   });
 
-  describe('app.keys=', function () {
-    it('should set app.io.keys', function () {
+  describe('app.keys=', function dAppKeys() {
+    it('should set app.io.keys', function itAppIoKeys() {
       var app = App();
       app.keys = ['foo'];
       app.io.keys.should.eql(['foo']);
@@ -96,8 +94,8 @@ describe('lib/application.js', function () {
     });
   });
 
-  describe('keys', function () {
-    it('should get app._keys', function () {
+  describe('keys', function dKeys() {
+    it('should get app._keys', function itGetAppPrivateKeys() {
       var app = App();
       app.keys = ['foo'];
       app.keys.should.equal(app._keys);

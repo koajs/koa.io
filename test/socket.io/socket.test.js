@@ -3,29 +3,26 @@
  * Copyright(c) 2014 dead_horse <dead_horse@qq.com>
  * MIT Licensed
  */
-
-'use strict';
-
 /**
  * Module dependencies.
  */
-
 var middleware = require('../supports/middleware');
 var qs = require('querystring');
-var should = require('should');
 
-describe('lib/socket.io/socket.js', function () {
-  describe('socket', function () {
-    it('should get socket ok', function (done) {
-      middleware(function* () {
+require('should');
+
+describe('lib/socket.io/socket.js', function describeLibSocketIOsocket() {
+  describe('socket', function describeSocket() {
+    it('should get socket ok', function itShouldGetSocketOK(done) {
+      middleware(function* socketShouldBeAnObject() {
         this.socket.should.be.Object;
         done();
       });
     });
 
-    describe('delegates', function () {
-      it('should delegates this.socket ok', function (done) {
-        middleware(function* () {
+    describe('delegates', function describeDelegates() {
+      it('should delegates this.socket ok', function itShouldDelegatesThisSocketOK(done) {
+        middleware(function* testShouldDelegatesThisSocketOKMiddleware() {
           this.client.should.equal(this.socket.client);
           this.server.should.equal(this.socket.server);
           this.adapter.should.equal(this.socket.adapter);
@@ -54,29 +51,31 @@ describe('lib/socket.io/socket.js', function () {
     });
   });
 
-  describe('header', function () {
-    it('should return this.socket.request.headers', function (done) {
-      middleware(function* () {
-        this.header.should.equal(this.socket.request.headers);
-        this.header.accept.should.equal('*/*');
-        done();
+  describe('header', function describeHeader() {
+    it('should return this.socket.request.headers',
+      function itShouldReturnThisSocketRequestHeaders(done) {
+        middleware(function* testSocketHeaderMiddleware() {
+          this.header.should.equal(this.socket.request.headers);
+          this.header.accept.should.equal('*/*');
+          done();
+        });
       });
-    });
   });
 
-  describe('headers', function () {
-    it('should return this.socket.request.headers', function (done) {
-      middleware(function* () {
-        this.headers.should.equal(this.socket.request.headers);
-        this.headers.accept.should.equal('*/*');
-        done();
+  describe('headers', function headers() {
+    it('should return this.socket.request.headers',
+      function itShouldReturnThisSocketRequestHeaders(done) {
+        middleware(function* testSocketHeadersMiddleware() {
+          this.headers.should.equal(this.socket.request.headers);
+          this.headers.accept.should.equal('*/*');
+          done();
+        });
       });
-    });
   });
 
-  describe('url', function () {
-    it('should return this.socket.request.url', function (done) {
-      middleware(function* () {
+  describe('url', function url() {
+    it('should return this.socket.request.url', function shouldReturnThisSocketRequestUrl(done) {
+      middleware(function* testUrlMiddleware() {
         this.url.should.equal(this.socket.request.url);
         this.url.should.containEql('/socket.io/');
         done();
@@ -84,40 +83,44 @@ describe('lib/socket.io/socket.js', function () {
     });
   });
 
-  describe('path', function () {
-    it('should return this.socket.request.url path', function (done) {
-      middleware(function* () {
-        this.path.should.equal('/socket.io/');
-        done();
+  describe('path', function path() {
+    it('should return this.socket.request.url path',
+      function shouldReturnThisSocketRequestUrlPath(done) {
+        middleware(function* pathShouldEqualSocketIo() {
+          this.path.should.equal('/socket.io/');
+          done();
+        });
       });
-    });
   });
 
-  describe('query', function () {
-    it('should return this.socket.request.url query', function (done) {
-      middleware(function* () {
-        this.query.transport.should.equal('polling');
-        done();
+  describe('query', function query() {
+    it('should return this.socket.request.url query',
+      function shouldReturnThisSocketRequestUrlQuery(done) {
+        middleware(function* transportShouldEqualPolling() {
+          this.query.transport.should.equal('polling');
+          done();
+        });
       });
-    });
   });
 
-  describe('querystring', function () {
-    it('should return this.socket.request.url querystring', function (done) {
-      middleware(function* () {
-        qs.parse(this.querystring).transport.should.equal('polling');
-        done();
+  describe('querystring', function querystring() {
+    it('should return this.socket.request.url querystring',
+      function shouldReturnTHisSocketRequestUrlQuerystring(done) {
+        middleware(function* querystringTransportShouldEqualPolling() {
+          qs.parse(this.querystring).transport.should.equal('polling');
+          done();
+        });
       });
-    });
   });
 
-  describe('search', function () {
-    it('should return this.socket.request.url search', function (done) {
-      middleware(function* () {
-        this.search[0].should.equal('?');
-        qs.parse(this.search.slice(1)).transport.should.equal('polling');
-        done();
+  describe('search', function search() {
+    it('should return this.socket.request.url search',
+      function shouldReturnThisSocketRequestUrlSearch(done) {
+        middleware(function* searchTestMiddleware() {
+          this.search[0].should.equal('?');
+          qs.parse(this.search.slice(1)).transport.should.equal('polling');
+          done();
+        });
       });
-    });
   });
 });
