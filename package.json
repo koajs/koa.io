@@ -41,7 +41,6 @@
     "socket.io": "~1.3.6"
   },
   "devDependencies": {
-    "autod": "2",
     "babel-eslint": "^4.1.1",
     "eslint-config-airbnb": "0.0.8",
     "gulp": "^3.9.0",
