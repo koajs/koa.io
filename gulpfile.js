@@ -32,7 +32,7 @@ gulp.task('test', ['lint'], function test(cb) {
           gulp.src(TESTS)
             .pipe(plugins.mocha())
             .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests ran
-            .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 75 } })) // Min 90% CC
+            .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 75 } })) // Min CC
             .on('end', function uploadCoverage(err) {
                   if (err) return cb(err);
                   gulp.src('coverage/**/lcov.info')

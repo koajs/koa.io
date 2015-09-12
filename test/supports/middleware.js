@@ -17,6 +17,7 @@ module.exports = function middleware(fn) {
   var app = koa();
   app.keys = ['secret'];
   app.io.use(fn);
-  client(app);
-  return app;
+  var server = app.listen();
+  client(server);
+  return { app: app, server: server };
 };

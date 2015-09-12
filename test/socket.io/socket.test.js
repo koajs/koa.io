@@ -8,8 +8,7 @@
  */
 var middleware = require('../supports/middleware');
 var qs = require('querystring');
-
-require('should');
+var should = require('should');
 
 describe('lib/socket.io/socket.js', function describeLibSocketIOsocket() {
   describe('socket', function describeSocket() {
@@ -122,5 +121,93 @@ describe('lib/socket.io/socket.js', function describeLibSocketIOsocket() {
           done();
         });
       });
+  });
+
+  describe('host', function dHost() {
+    it('should be the host of the server', function host(done) {
+      var port = middleware(function* hostMiddleware() {
+        this.host.should.equal('0.0.0.0:' + port);
+        done();
+      }).server.address().port;
+    });
+  });
+
+  describe('hostname', function dHostname() {
+    it('should be localhost', function hostname(done) {
+      middleware(function* hostnameMiddleware() {
+        this.hostname.should.equal('0.0.0.0');
+        done();
+      });
+    });
+  });
+
+  //describe('host', function search() {
+  //  it('should', function host(done) {
+  //    middleware(function* hostMiddleware() {
+  //      // TODO
+  //      done();
+  //    })
+  //  });
+  //});
+  //ip: ::ffff:127.0.0.1
+  //ips: []
+
+  describe('charset', function dCharset() {
+    // TODO: With a charset
+    it('should be null (it hasn\'t been set)', function charset(done) {
+      middleware(function* charsetMiddleware() {
+        should(this.charset).equal(null);
+        done();
+      });
+    });
+  });
+
+  describe('protocol', function dProtocol() {
+    it('should be http', function protocol(done) {
+      middleware(function* protocolMiddleware() {
+        this.protocol.should.equal('http');
+        done();
+      });
+    });
+  });
+
+  describe('secure', function dSecure() {
+    it('should be false', function secure(done) {
+      middleware(function* secureMiddleware() {
+        this.secure.should.equal(false);
+        done();
+      });
+    });
+  });
+
+  describe('ip', function dIP() {
+    it('should be ::ffff:127.0.0.1 (127.0.0.1 mapped to IPv6)', function ip(done) {
+      middleware(function* ipMiddleware() {
+        this.ip.should.equal('::ffff:127.0.0.1');
+        done();
+      });
+    });
+  });
+
+  describe('ips', function dIP() {
+    // TODO: With a proxy
+    describe('without a proxy', function dWithoutAProxy() {
+      it('should be []', function ips(done) {
+        middleware(function* ipsMiddleware() {
+          this.ips.should.deepEqual([]);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('get header', function dGetHeader() {
+    it('should return undefined when a header doesn\'t exist', function doesntExist(done) {
+      middleware(function* doesntExistMiddleware() {
+        should(this.get('X-Doesnt-Exist')).equal(undefined);
+        console.log('ref', this.get('referer'));
+        done();
+      });
+    });
   });
 });
