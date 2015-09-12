@@ -4,7 +4,8 @@
   "description": "realtime web framework combine koa and socket.io",
   "main": "lib/application.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test --harmony",
+    "watch": "gulp watch --harmony"
   },
   "keywords": [
     "koa",
