@@ -9,17 +9,17 @@ koa.io
 [![node version][node-image]][node-url]
 [![Gittip][gittip-image]][gittip-url]
 
-[npm-image]: https://img.shields.io/npm/v/koa.io.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/koa.io.svg
 [npm-url]: https://npmjs.org/package/koa.io
-[travis-image]: https://img.shields.io/travis/koajs/koa.io.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/koajs/koa.io.svg
 [travis-url]: https://travis-ci.org/koajs/koa.io
-[coveralls-image]: https://img.shields.io/coveralls/koajs/koa.io.svg?style=flat-square
+[coveralls-image]: https://img.shields.io/coveralls/koajs/koa.io.svg
 [coveralls-url]: https://coveralls.io/r/koajs/koa.io?branch=master
-[david-image]: https://img.shields.io/david/koajs/koa.io.svg?style=flat-square
+[david-image]: https://img.shields.io/david/koajs/koa.io.svg
 [david-url]: https://david-dm.org/koajs/koa.io
-[node-image]: https://img.shields.io/badge/node.js-%3E=_0.11-red.svg?style=flat-square
+[node-image]: https://img.shields.io/badge/node.js-%3E=_0.11-red.svg
 [node-url]: http://nodejs.org/download/
-[gittip-image]: https://img.shields.io/gittip/dead-horse.svg?style=flat-square
+[gittip-image]: https://img.shields.io/gittip/dead-horse.svg
 [gittip-url]: https://www.gittip.com/dead-horse/
 
 Realtime web framework combine [koa](http://koajs.com) and [socket.io](http://socket.io).
