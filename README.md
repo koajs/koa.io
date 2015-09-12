@@ -5,7 +5,8 @@ koa.io
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
-[![David deps][david-image]][david-url]
+[![Dependency Status][david-image]][david-url]
+[![devDependency Status][david-dev-image]][david-dev-url]
 [![node version][node-image]][node-url]
 
 [npm-image]: https://img.shields.io/npm/v/koa.io.svg
@@ -16,6 +17,8 @@ koa.io
 [coveralls-url]: https://coveralls.io/r/koajs/koa.io?branch=master
 [david-image]: https://img.shields.io/david/koajs/koa.io.svg
 [david-url]: https://david-dm.org/koajs/koa.io
+[david-dev-image]: https://david-dm.org/koajs/koa.io/dev-status.svg
+[david-dev-url]: https://david-dm.org/koajs/koa.io#info=devDependencies
 [node-image]: https://img.shields.io/badge/node.js-%3E=_0.11-red.svg
 [node-url]: http://nodejs.org/download/
 [gittip-image]: https://img.shields.io/gittip/dead-horse.svg
