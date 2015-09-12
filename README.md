@@ -7,7 +7,6 @@ koa.io
 [![Test coverage][coveralls-image]][coveralls-url]
 [![David deps][david-image]][david-url]
 [![node version][node-image]][node-url]
-[![Gittip][gittip-image]][gittip-url]
 
 [npm-image]: https://img.shields.io/npm/v/koa.io.svg
 [npm-url]: https://npmjs.org/package/koa.io
