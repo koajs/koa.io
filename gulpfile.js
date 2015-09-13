@@ -51,9 +51,9 @@ gulp.task('test-cov', ['lint'], function testcov(cb) {
           }
           console.log('Uploading to Coveralls');
           gulp.src('coverage/**/lcov.info')
-            .pipe(plugins.debug({ title: 'in: ' }))
+            .pipe(plugins.debug({title: 'in: '}))
             .pipe(plugins.coveralls())
-            .pipe(plugins.debug({ title: 'out: ' }))
+            .pipe(plugins.debug({title: 'out: '}))
             .on('error', function ignoreNoProjectFoundErrors(err) {
               console.log('Error Found:', err);
               if (err.message.indexOf('find') > -1 &&
@@ -66,17 +66,20 @@ gulp.task('test-cov', ['lint'], function testcov(cb) {
                 process.exit();
               } else {
                 console.log('Error Uploading to Coveralls:');
-                process.nextTick(function(){
+                process.nextTick(function () {
                   process.exit(1);
                 });
                 throw err;
               }
             })
             // See above comment, but we need this due to gulp-mocha and socket.io
-            .on('end', function kill(){
+            .on('end', function kill() {
               console.log('Uploaded to Coveralls');
               process.exit();
-            });
+            })
+            .on('finish', function log() {
+              console.log('finished');
+            })
         });
     });
 });
