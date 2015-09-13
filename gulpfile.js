@@ -73,12 +73,9 @@ gulp.task('test-cov', ['lint'], function testcov(cb) {
               }
             })
             // See above comment, but we need this due to gulp-mocha and socket.io
-            .on('end', function kill() {
+            .on('finish', function kill() {
               console.log('Uploaded to Coveralls');
               process.exit();
-            })
-            .on('finish', function log() {
-              console.log('finished');
             })
         });
     });
