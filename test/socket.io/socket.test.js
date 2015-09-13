@@ -6,11 +6,32 @@
 /**
  * Module dependencies.
  */
-var middleware = require('../supports/middleware');
 var qs = require('querystring');
 var should = require('should');
+var Koa = require('../../');
+var Client = require('../supports/client');
 
 describe('lib/socket.io/socket.js', function describeLibSocketIOsocket() {
+  var app;
+  var server;
+  var client;
+
+  function middleware(fn) {
+    fn && app.io.use(fn);
+    client = Client(server);
+  }
+
+  beforeEach(function startServer(done) {
+    app = Koa();
+    server = app.createServer();
+    server.listen(done);
+  });
+
+  afterEach(function stopServer() {
+    server.close();
+    client && client.disconnect();
+  });
+
   describe('socket', function describeSocket() {
     it('should get socket ok', function itShouldGetSocketOK(done) {
       middleware(function* socketShouldBeAnObject() {
@@ -20,7 +41,7 @@ describe('lib/socket.io/socket.js', function describeLibSocketIOsocket() {
     });
 
     describe('delegates', function describeDelegates() {
-      it('should delegates this.socket ok', function itShouldDelegatesThisSocketOK(done) {
+      it('should delegate this.socket', function itShouldDelegatesThisSocketOK(done) {
         middleware(function* testShouldDelegatesThisSocketOKMiddleware() {
           this.client.should.equal(this.socket.client);
           this.server.should.equal(this.socket.server);
@@ -125,10 +146,10 @@ describe('lib/socket.io/socket.js', function describeLibSocketIOsocket() {
 
   describe('host', function dHost() {
     it('should be the host of the server', function host(done) {
-      var port = middleware(function* hostMiddleware() {
-        this.host.should.equal('0.0.0.0:' + port);
+      middleware(function* hostMiddleware() {
+        this.host.should.equal('0.0.0.0:' + server.address().port);
         done();
-      }).server.address().port;
+      });
     });
   });
 
@@ -140,17 +161,6 @@ describe('lib/socket.io/socket.js', function describeLibSocketIOsocket() {
       });
     });
   });
-
-  //describe('host', function search() {
-  //  it('should', function host(done) {
-  //    middleware(function* hostMiddleware() {
-  //      // TODO
-  //      done();
-  //    })
-  //  });
-  //});
-  //ip: ::ffff:127.0.0.1
-  //ips: []
 
   describe('charset', function dCharset() {
     // TODO: With a charset
@@ -205,7 +215,19 @@ describe('lib/socket.io/socket.js', function describeLibSocketIOsocket() {
     it('should return undefined when a header doesn\'t exist', function doesntExist(done) {
       middleware(function* doesntExistMiddleware() {
         should(this.get('X-Doesnt-Exist')).equal(undefined);
-        console.log('ref', this.get('referer'));
+        done();
+      });
+    });
+  });
+
+  describe('error handling', function dError() {
+    it('should properly handle errors thrown in a generator', function error(done) {
+      var err = new Error('EVERYTHING IS SO BROKEN!!!!');
+      middleware(function* errorMiddleware() {
+        throw err;
+      });
+      client.on('error', function onError(e) {
+        e.should.equal(err.message);
         done();
       });
     });

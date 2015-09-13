@@ -24,39 +24,45 @@ gulp.task('lint', function lint() {
     .pipe(plugins.eslint.failAfterError());
 });
 
-gulp.task('test', ['lint'], function test() {
+function test() {
   return gulp.src(TESTS)
     .pipe(plugins.mocha());
+}
+
+gulp.task('test', ['lint'], function testTask() {
+  // We need this because gulp-mocha won't exit if any connections are left open. We close all of ours (I think), so I blame socket.io
+  return test()
+    .pipe(plugins.exit());
 });
 
 gulp.task('test-cov', ['lint'], function testcov(cb) {
   gulp.src(SRC_JS)
     .pipe(plugins.istanbul()) // Covering files
     .pipe(plugins.istanbul.hookRequire()) // Force `require` to return covered files
-    .on('finish', function() {
-          gulp.src(TESTS)
-            .pipe(plugins.mocha())
-            .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests ran
-            .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 75 } })) // Min CC
-            .on('end', function uploadCoverage(err) {
-                  if (err) return cb(err);
-                  gulp.src('coverage/**/lcov.info')
-                    .pipe(plugins.coveralls())
-                    .on('error', function ignoreNoProjectFoundErrors(err) {
-                          if (err.message.indexOf('find') > -1 &&
-                              err.message.indexOf('repo') > -1) {
-                            console.log(
-                              'Hey, it looks like you haven\'t setup coveralls yet, or you\'re not ' +
-                              'on Travis! No problem, but I\'m not going to upload code coverage.'
-                            );
-                            cb();
-                          } else {
-                            cb(err)
-                          }
-                        })
-                    .on('end', cb);
-                });
+    .on('finish', function () {
+      test()
+        .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests ran
+        .pipe(plugins.istanbul.enforceThresholds({thresholds: {global: 75}})) // Min CC
+        .on('end', function uploadCoverage(err) {
+          if (err) return cb(err);
+          gulp.src('coverage/**/lcov.info')
+            .pipe(plugins.coveralls())
+            .on('error', function ignoreNoProjectFoundErrors(err) {
+              if (err.message.indexOf('find') > -1 &&
+                err.message.indexOf('repo') > -1) {
+                console.log(
+                  'Hey, it looks like you haven\'t setup coveralls yet, or you\'re not ' +
+                  'on Travis! No problem, but I\'m not going to upload code coverage.'
+                );
+                // See above comment, but we need this due to gulp-mocha and socket.io
+                process.exit();
+              } else {
+                cb(err)
+              }
+            })
+            .on('end', cb);
         });
+    });
 });
 
 gulp.task('watch', function watch() {

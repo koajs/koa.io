@@ -14,7 +14,7 @@ var koa = require('../../');
 
 module.exports = function SessionApp() {
   var app = koa();
-  app.keys = ['secrect'];
+  app.keys = ['secret'];
 
   app.io.use(function* simCookies(next) {
     // we can't send cookie in ioc

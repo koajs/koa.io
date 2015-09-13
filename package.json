@@ -20,11 +20,13 @@
     "email": "dead_horse@qq.com",
     "url": "http://deadhorse.me"
   },
-  "contributors": [{
-    "name": "Ari Porad",
-    "email": "npm@ariporad.com",
-    "url": "http://ariporad.com"
-  }],
+  "contributors": [
+    {
+      "name": "Ari Porad",
+      "email": "npm@ariporad.com",
+      "url": "http://ariporad.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:koajs/koa.io"
@@ -47,6 +49,7 @@
     "gulp": "^3.9.0",
     "gulp-coveralls": "^0.1.4",
     "gulp-eslint": "^1.0.0",
+    "gulp-exit": "0.0.2",
     "gulp-istanbul": "^0.10.0",
     "gulp-mocha": "^2.1.3",
     "istanbul-harmony": "~0.3.16",
