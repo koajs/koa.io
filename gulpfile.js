@@ -44,7 +44,13 @@ gulp.task('test-cov', ['lint'], function testcov(cb) {
         .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests ran
         .pipe(plugins.istanbul.enforceThresholds({thresholds: {global: 75}})) // Min CC
         .on('end', function uploadCoverage(err) {
-          if (err) return cb(err);
+          if (err) {
+            process.nextTick(function kill() {
+              process.exit();
+            });
+            throw err;
+          }
+          console.log('Uploading to Coveralls');
           gulp.src('coverage/**/lcov.info')
             .pipe(plugins.coveralls())
             .on('error', function ignoreNoProjectFoundErrors(err) {
