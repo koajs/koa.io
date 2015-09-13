@@ -55,6 +55,7 @@ gulp.task('test-cov', ['lint'], function testcov(cb) {
             .pipe(plugins.coveralls())
             .pipe(plugins.debug({ title: 'out: ' }))
             .on('error', function ignoreNoProjectFoundErrors(err) {
+              console.log('Error Found:', err);
               if (err.message.indexOf('find') > -1 &&
                 err.message.indexOf('repo') > -1) {
                 console.log(
