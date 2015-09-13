@@ -45,14 +45,15 @@ gulp.task('test-cov', ['lint'], function testcov(cb) {
         .pipe(plugins.istanbul.enforceThresholds({thresholds: {global: 75}})) // Min CC
         .on('end', function uploadCoverage(err) {
           if (err) {
-            process.nextTick(function kill() {
-              process.exit();
-            });
-            throw err;
+            console.log(err.message);
+            console.log(err.stack);
+            process.exit(1);
           }
           console.log('Uploading to Coveralls');
           gulp.src('coverage/**/lcov.info')
+            .pipe(plugins.debug({ title: 'in: ' }))
             .pipe(plugins.coveralls())
+            .pipe(plugins.debug({ title: 'out: ' }))
             .on('error', function ignoreNoProjectFoundErrors(err) {
               if (err.message.indexOf('find') > -1 &&
                 err.message.indexOf('repo') > -1) {
