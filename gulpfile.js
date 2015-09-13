@@ -57,11 +57,16 @@ gulp.task('test-cov', ['lint'], function testcov(cb) {
                 // See above comment, but we need this due to gulp-mocha and socket.io
                 process.exit();
               } else {
-                cb(err)
+                process.nextTick(function(){
+                  process.exit(1);
+                });
+                throw err;
               }
             })
             // See above comment, but we need this due to gulp-mocha and socket.io
-            .on('end', process.exit.bind(process));
+            .on('end', function kill(){
+              process.exit();
+            });
         });
     });
 });
