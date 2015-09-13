@@ -8,5 +8,5 @@ node_js:
   - "iojs-v3"
   - "4"
 script:
-  - npm test
-  - npm test-cov
+  - npm run test
+  - npm run test-cov
