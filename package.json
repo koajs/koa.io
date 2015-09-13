@@ -5,6 +5,7 @@
   "main": "lib/application.js",
   "scripts": {
     "test": "gulp test --harmony",
+    "test-cov": "gulp test-cov --harmony",
     "watch": "gulp watch --harmony"
   },
   "keywords": [

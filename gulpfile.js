@@ -24,7 +24,12 @@ gulp.task('lint', function lint() {
     .pipe(plugins.eslint.failAfterError());
 });
 
-gulp.task('test', ['lint'], function test(cb) {
+gulp.task('test', ['lint'], function test() {
+  return gulp.src(TESTS)
+    .pipe(plugins.mocha());
+});
+
+gulp.task('test-cov', ['lint'], function testcov(cb) {
   gulp.src(SRC_JS)
     .pipe(plugins.istanbul()) // Covering files
     .pipe(plugins.istanbul.hookRequire()) // Force `require` to return covered files
