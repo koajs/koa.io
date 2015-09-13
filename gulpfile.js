@@ -57,6 +57,7 @@ gulp.task('test-cov', ['lint'], function testcov(cb) {
                 // See above comment, but we need this due to gulp-mocha and socket.io
                 process.exit();
               } else {
+                console.log('Error Uploading to Coveralls:');
                 process.nextTick(function(){
                   process.exit(1);
                 });
@@ -65,6 +66,7 @@ gulp.task('test-cov', ['lint'], function testcov(cb) {
             })
             // See above comment, but we need this due to gulp-mocha and socket.io
             .on('end', function kill(){
+              console.log('Uploaded to Coveralls');
               process.exit();
             });
         });
