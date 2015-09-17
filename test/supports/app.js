@@ -14,9 +14,9 @@ var koa = require('../../');
 
 module.exports = function SessionApp() {
   var app = koa();
-  app.keys = ['secrect'];
+  app.keys = ['secret'];
 
-  app.io.use(function* (next) {
+  app.io.use(function* simCookies(next) {
     // we can't send cookie in ioc
     this.header.cookie = this.query.cookie;
     yield *next;
@@ -26,12 +26,12 @@ module.exports = function SessionApp() {
     namespace: '/'
   });
 
-  app.use(function* () {
-    this.session.user = { name: 'foo' };
+  app.use(function* fakeSession() {
+    this.session.user = {name: 'foo'};
     this.body = 'hello';
   });
 
-  app.io.use(function* (next) {
+  app.io.use(function* userJoinAndLeave(next) {
     if (!this.session.user) {
       return this.socket.emit('forbidden');
     }
@@ -40,8 +40,9 @@ module.exports = function SessionApp() {
     this.emit('user leave', this.session.user.name);
   });
 
-  app.io.route('message', function (next, message) {
-    this.broadcase.emit('message', message);
+  app.io.route('message', function* messageRoute(next, message) {
+    this.emit('message', message);
+    yield *next;
   });
 
   return app;

@@ -1,5 +1,4 @@
 benchmark/
 test/
-cov/
+coverage/
 Makefile
-covrage.html

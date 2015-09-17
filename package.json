@@ -4,7 +4,9 @@
   "description": "realtime web framework combine koa and socket.io",
   "main": "lib/application.js",
   "scripts": {
-    "test": "make test"
+    "test": "gulp test --harmony",
+    "test-cov": "gulp test-cov --harmony",
+    "watch": "gulp watch --harmony"
   },
   "keywords": [
     "koa",
@@ -18,34 +20,50 @@
     "email": "dead_horse@qq.com",
     "url": "http://deadhorse.me"
   },
+  "contributors": [
+    {
+      "name": "Ari Porad",
+      "email": "npm@ariporad.com",
+      "url": "http://ariporad.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:koajs/koa.io"
   },
   "license": "MIT",
   "dependencies": {
-    "co": "~4.4.0",
+    "co": "~4.6.0",
     "cookies": "~0.5.0",
-    "debug": "~2.1.1",
+    "debug": "~2.2.0",
     "delegates": "~0.1.0",
-    "koa": "~0.18.0",
+    "koa": "~1.0.0",
     "koa-compose": "~2.3.0",
-    "koa-generic-session": "~1.6.0",
+    "koa-generic-session": "~1.9.2",
     "parseurl": "~1.3.0",
-    "socket.io": "~1.3.4"
+    "socket.io": "~1.3.6"
   },
   "devDependencies": {
-    "autod": "1",
-    "istanbul-harmony": "~0.3.1",
-    "koa-static": "~1.4.7",
-    "koa-static-cache": "~3.0.1",
-    "mocha": "~2.1.0",
+    "babel-eslint": "^4.1.1",
+    "eslint-config-airbnb": "0.0.8",
+    "gulp": "^3.9.0",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-debug": "^2.1.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-exit": "0.0.2",
+    "gulp-istanbul": "^0.10.0",
+    "gulp-mocha": "^2.1.3",
+    "istanbul-harmony": "~0.3.16",
+    "koa-static": "~1.4.9",
+    "koa-static-cache": "~3.1.2",
+    "load-plugins": "^2.1.0",
+    "mocha": "~2.3.2",
     "pedding": "~1.0.0",
-    "should": "~5.0.0",
-    "socket.io-client": "~1.3.4",
-    "supertest": "~0.15.0"
+    "should": "~7.1.0",
+    "socket.io-client": "~1.3.6",
+    "supertest": "~1.1.0"
   },
   "engine": {
-    "node": ">=0.10"
+    "node": ">=0.11"
   }
 }
