@@ -1,9 +1,4 @@
-/*!
- * koa.io - gulpfile.js
- * Copyright(c) 2015 Ari Porad <ari@ariporad.com>
- * MIT Licensed
- */
-
+/* (c) 2015 Ari Porad (@ariporad) <ari@ariporad.com>. MIT Licensed */
 'use strict';
 
 /**

@@ -1,9 +1,4 @@
-/*!
- * koa.io - test/application.test.js
- * Copyright(c) 2014 dead_horse <dead_horse@qq.com>
- * MIT Licensed
- */
-
+/* (c) 2015 Ari Porad (@ariporad) <ari@ariporad.com>. MIT Licensed */
 /**
  * Module dependencies.
  */
