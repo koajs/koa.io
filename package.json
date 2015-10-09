@@ -48,7 +48,7 @@
     "eslint-config-airbnb": "0.0.8",
     "gulp": "3.9.0",
     "gulp-coveralls": "0.1.4",
-    "gulp-debug": "2.1.0",
+    "gulp-debug": "2.1.2",
     "gulp-eslint": "1.0.0",
     "gulp-exit": "0.0.2",
     "gulp-istanbul": "0.10.0",
