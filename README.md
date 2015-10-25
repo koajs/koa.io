@@ -53,7 +53,7 @@ app.use(function*() {
 });
 
 
-// middleware for scoket.io's connect and disconnect
+// middleware for socket.io's connect and disconnect
 app.io.use(function* (next) {
   // on connect
   yield* next;
