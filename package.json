@@ -52,7 +52,7 @@
     "gulp-eslint": "1.0.0",
     "gulp-exit": "0.0.2",
     "gulp-istanbul": "0.10.2",
-    "gulp-mocha": "2.1.3",
+    "gulp-mocha": "2.2.0",
     "istanbul-harmony": "0.3.16",
     "koa-static": "1.5.1",
     "koa-static-cache": "3.1.2",
