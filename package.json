@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "babel-eslint": "4.1.3",
-    "eslint-config-airbnb": "0.0.8",
+    "eslint-config-airbnb": "2.1.1",
     "gulp": "3.9.0",
     "gulp-coveralls": "0.1.4",
     "gulp-debug": "2.1.2",
