@@ -35,7 +35,7 @@
   "dependencies": {
     "co": "4.6.0",
     "cookies": "0.5.1",
-    "debug": "2.2.0",
+    "debug": "2.6.7",
     "delegates": "0.1.0",
     "koa": "1.1.1",
     "koa-compose": "2.3.0",
