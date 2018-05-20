@@ -39,7 +39,7 @@
     "delegates": "0.1.0",
     "koa": "1.1.1",
     "koa-compose": "2.3.0",
-    "koa-generic-session": "1.9.2",
+    "koa-generic-session": "1.10.2",
     "parseurl": "1.3.0",
     "socket.io": "1.3.7"
   },
